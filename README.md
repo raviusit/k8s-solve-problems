@@ -1,2 +1,1 @@
-# k8s-solve-problems
-challenges  repo
+# k8s-problems

@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-2
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-2
+    spec:
+      containers:
+        - args:
+            - /bin/sh
+            - -c
+            - "sleep 3600"
+          name: k8s-problem-2
+          image: k8s.gcr.io/busybox
+          livenessProbe:
+            exec:
+              command:
+                - cat
+                - /tmp/healthy
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            failureThreshold: 1

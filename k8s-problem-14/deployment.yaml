@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-14
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-14
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-14
+    spec:
+      containers:
+        - name: k8s-problem-14
+          image: k8s.gcr.io/busybox
+          command: ["/bin/sh", "-c", "while :; do env; sleep 5 ; done"]
+      initContainers:
+        - name: init-container
+          image: k8s.gcr.io/busybox
+          command: ["/bin/sh", "-c", "while :; do env; sleep 5 ; done"]

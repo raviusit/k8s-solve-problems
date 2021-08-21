@@ -1,0 +1,10 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: special-volume-claim
+spec:
+  resources:
+    requests:
+      storage: 64M
+  accessModes:
+    - ReadWriteOnce

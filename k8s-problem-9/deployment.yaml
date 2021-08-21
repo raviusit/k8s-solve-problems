@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-9
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-9
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-9
+    spec:
+      containers:
+      - name: k8s-problem-9
+        image: nginx:1.14.2
+        ports:
+        - containerPort: 81

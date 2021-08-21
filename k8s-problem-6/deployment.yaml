@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app-one
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      version: version-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        version: version-1
+    spec:
+      containers:
+        - name: hello-app
+          image: hashicorp/http-echo
+          args:
+            - "-text=hello-version-1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-app-two
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      version: version-2
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        version: version-2
+    spec:
+      containers:
+        - name: hello-app
+          image: hashicorp/http-echo
+          args:
+            - "-text=hello-version-2"

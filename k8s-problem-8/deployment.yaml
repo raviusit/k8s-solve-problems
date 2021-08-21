@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-8
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-8
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-8
+    spec:
+      containers:
+        - name: echo-app
+          image: hashicorp/http-echo:0.2.4
+          args:
+            - "-text=hello"

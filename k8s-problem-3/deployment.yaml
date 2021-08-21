@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-3
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-3
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-3
+    spec:
+      containers:
+        - name: k8s-problem-3
+          image: k8s.gcr.io/busybox
+          command: ["/bin/sh", "-ec", "while :; do echo $(SPECIAL_LEVEL_KEY) $(SPECIAL_TYPE_KEY); sleep 5 ; done"]
+          env:
+            - name: SPECIAL_LEVEL_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: special-config
+                  key: SPECIAL_LEVEL
+            - name: SPECIAL_TYPE_KEY
+              valueFrom:
+                configMapKeyRef:
+                  name: specialconfig
+                  key: SPECIAL_TYPE

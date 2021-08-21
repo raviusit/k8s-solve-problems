@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-7
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-7
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-7
+    spec:
+      containers:
+        - name: busybox
+          image: k8s.gcr.io/busybox
+          args:
+            - "sleep"
+            - "-z"

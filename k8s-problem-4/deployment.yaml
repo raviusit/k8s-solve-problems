@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-4
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-4
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-4
+    spec:
+      volumes:
+        - name: special-volume
+          persistentVolumeClaim:
+            claimName: special-volume-cliam
+      containers:
+        - name: k8s-problem-4
+          volumeMounts:
+            - name: special-volume
+              mountPath: /var/forever
+          image: k8s.gcr.io/busybox
+          command: ["/bin/sh"]
+          args:
+            [
+              "-c",
+              "while true; do date >> /var/forever/file.txt; sleep 300; cat /var/forever/file.txt; done",
+            ]

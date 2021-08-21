@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-problem-1
+spec:
+  selector:
+    matchLabels:
+      app: k8s-problem-1
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: k8s-problem-1
+    spec:
+      containers:
+        - name: k8s-problem-1
+          image: k8s.gcr.io/busybox
+          command: ["/bin/sh", "-c", "while :; do env; sleep 5 ; done"]
+          envFrom:
+          - secretRef:
+              name: special-secrets

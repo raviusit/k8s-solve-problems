@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: hello-app
+spec:
+  hard:
+    pods: "1"
